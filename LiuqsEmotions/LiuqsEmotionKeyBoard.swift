@@ -268,13 +268,11 @@ class LiuqsEmotionKeyBoard: UIImageView ,UIScrollViewDelegate {
 
             }else {
                 
-                
                 let imageName = "[" + String(btn.tag) + "]"
                 
                 btn.setImage(UIImage.init(named: imageName), for: UIControlState.normal)
                 
                 btn.addTarget(self, action: #selector(self.insertEmoji(btn:)), for: UIControlEvents.touchUpInside)
-                
             }
             
             self.emotonViewPageOne.addSubview(btn)
@@ -327,11 +325,9 @@ class LiuqsEmotionKeyBoard: UIImageView ,UIScrollViewDelegate {
                 btn.setImage(UIImage.init(named: imageName), for: UIControlState.normal)
                 
                 btn.addTarget(self, action: #selector(self.insertEmoji(btn:)), for: UIControlEvents.touchUpInside)
-                
             }
             
             self.emotonViewPageTwo.addSubview(btn)
-            
         }
     }
     
@@ -375,17 +371,14 @@ class LiuqsEmotionKeyBoard: UIImageView ,UIScrollViewDelegate {
                 
             }else {
                 
-                
                 let imageName = "[" + String(btn.tag) + "]"
                 
                 btn.setImage(UIImage.init(named: imageName), for: UIControlState.normal)
                 
                 btn.addTarget(self, action: #selector(self.insertEmoji(btn:)), for: UIControlEvents.touchUpInside)
-                
             }
             
             self.emotonViewPageThree.addSubview(btn)
-            
         }
     }
     
@@ -514,7 +507,6 @@ class LiuqsEmotionKeyBoard: UIImageView ,UIScrollViewDelegate {
         }
 
     }
-
     
     func createPageControl() {
     

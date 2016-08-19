@@ -39,3 +39,15 @@ let toolBarFrameUPBaseEmotion = CGRect(x:0, y:screenH - toobarH - EMOJI_KEYBOARD
 let Vgap:CGFloat = screenW * 5 / 320
 
 let Lgap:CGFloat = screenW * 10 / 320
+
+///emotionView
+
+let emotionUpFrame:CGRect = CGRect.init(x: 0, y: screenH - (EMOJI_KEYBOARD_HEIGHT), width: screenW, height: EMOJI_KEYBOARD_HEIGHT)
+
+let emotionDownFrame = CGRect.init(x: 0, y: screenH, width: screenW, height: 0)
+
+let emotionTipTime  = 0.25
+
+
+
+
