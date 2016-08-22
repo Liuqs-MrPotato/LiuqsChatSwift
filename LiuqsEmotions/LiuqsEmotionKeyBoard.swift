@@ -95,10 +95,10 @@ class LiuqsEmotionKeyBoard: UIImageView ,UIScrollViewDelegate {
     
     func setSomeProperty() {
     
-        if (KeyTextView!.font != nil)
+        if (KeyTextView!.font == nil) {
             
-        {KeyTextView?.font = UIFont.systemFont(ofSize: 17)}
-        
+            KeyTextView?.font = UIFont.systemFont(ofSize: 17)
+        }
         font = (KeyTextView?.font!)!
         
         EMOJI_MAX_SIZE = heightWithFont(font: font)
@@ -663,20 +663,94 @@ class LiuqsEmotionKeyBoard: UIImageView ,UIScrollViewDelegate {
     }
     
     func deleteBtnClick(btn:UIButton) {
-    
         
+        self.KeyTextView?.deleteBackward()
+        
+        emotionBtnDidClick(btn: btn)
     }
     
+    //静态表情的按钮事件
     func insertEmoji(btn:UIButton) {
+        
+        /*LiuqsTextAttachment *emojiTextAttachment = [LiuqsTextAttachment new];
+         
+         emojiTextAttachment.emojiTag = _emojiTags[(NSUInteger) btn.tag - 1];
+         
+         NSString *imageName = [_emojiImages objectForKey:_emojiTags[(NSUInteger) btn.tag - 1]];
+         
+         emojiTextAttachment.image = [UIImage imageNamed:imageName];
+         
+         emojiTextAttachment.emojiSize = CGSizeMake(_EMOJI_MAX_SIZE, _EMOJI_MAX_SIZE);
+         
+         NSAttributedString *attstr = [NSAttributedString attributedStringWithAttachment:emojiTextAttachment];
+         
+         [_IputView.textStorage insertAttributedString:attstr atIndex:_IputView.selectedRange.location];
+         
+         _IputView.selectedRange = NSMakeRange(_IputView.selectedRange.location + 1, _IputView.selectedRange.length);
+         
+         [self emotionBtnDidClick:btn];
+         
+         [self resetTextStyle];
+*/
     
+        emotionBtnDidClick(btn: btn)
+        
+        let emojiTextAttachment:LiuqsTextAttachment = LiuqsTextAttachment()
+        
+        emojiTextAttachment.emojiTag = _emojiTags[btn.tag - 1] as! String
+        
+        let imageName:String = _emojiStaticImages.object(forKey: emojiTextAttachment.emojiTag)! as! String
+        
+        emojiTextAttachment.image = UIImage.init(named: imageName)
+        
+        emojiTextAttachment.emojiSize = CGSize.init(width: EMOJI_MAX_SIZE, height: EMOJI_MAX_SIZE);
+        
+        let attstr:NSAttributedString = NSAttributedString.init(attachment: emojiTextAttachment)
+        
+        KeyTextView?.textStorage.insert(attstr, at: (KeyTextView?.selectedRange.location)!)
+        
+        KeyTextView?.selectedRange = NSRange.init(location: (KeyTextView?.selectedRange.location)! + 1, length: (KeyTextView?.selectedRange.length)!)
+        
+        emotionBtnDidClick(btn: btn)
+        
+        resetTextStyle()
         
     }
     
+    func resetTextStyle() {
+    
+        /*NSRange wholeRange = NSMakeRange(0, _IputView.textStorage.length);
+         
+         [_IputView.textStorage removeAttribute:NSFontAttributeName range:wholeRange];
+         
+         [_IputView.textStorage addAttribute:NSFontAttributeName value:self.font range:wholeRange];
+         
+         [self.IputView scrollRectToVisible:CGRectMake(0, 0, _IputView.contentSize.width, _IputView.contentSize.height) animated:YES];
+*/
+        let wholeRange:NSRange = NSRange.init(location: 0, length: (KeyTextView?.textStorage.length)!)
+        
+        KeyTextView?.textStorage.removeAttribute(NSFontAttributeName, range: wholeRange)
+        
+        KeyTextView?.textStorage.addAttributes([NSFontAttributeName:font], range: wholeRange)
+        
+        KeyTextView?.scrollRectToVisible(CGRect.init(x: 0, y: 0, width: (KeyTextView?.contentSize.width)!, height: (KeyTextView?.contentSize.height)!), animated: true)
+        
+    }
+    
+    //gif表情按钮点击事件
     func emotionGifClick(btn:UIButton) {
     
         
     }
     
+    //发送，删除，表情等按钮的事件，用来处理按钮状态
+    func emotionBtnDidClick(btn:UIButton) {
+    
+        self.delegate?.emotionView_sBtnDidClick(btn: btn)
+        
+    }
+    
+    //底部按钮条上的表情按钮，切换不同类型表情
     func emotionBtnsClick(btn:UIButton) {
         
         self.emotionBtn.isSelected = false;

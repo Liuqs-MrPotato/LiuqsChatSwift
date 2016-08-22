@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		731DF8271D6AD39D00FA3C6A /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 731DF8261D6AD39D00FA3C6A /* UIView+Extension.swift */; };
+		731DF8291D6AEADA00FA3C6A /* LiuqsTextAttachment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 731DF8281D6AEADA00FA3C6A /* LiuqsTextAttachment.swift */; };
 		7320DC591D5811FE007383DB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7320DC581D5811FE007383DB /* AppDelegate.swift */; };
 		7320DC601D5811FE007383DB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7320DC5F1D5811FE007383DB /* Assets.xcassets */; };
 		7320DC631D5811FE007383DB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7320DC611D5811FE007383DB /* LaunchScreen.storyboard */; };
@@ -158,6 +160,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		731DF8261D6AD39D00FA3C6A /* UIView+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
+		731DF8281D6AEADA00FA3C6A /* LiuqsTextAttachment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LiuqsTextAttachment.swift; sourceTree = "<group>"; };
 		7320DC551D5811FE007383DB /* LiuqsChatEmotionSwift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LiuqsChatEmotionSwift.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7320DC581D5811FE007383DB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = ../LiuqsChatEmotionSwift/AppDelegate.swift; sourceTree = "<group>"; };
 		7320DC5F1D5811FE007383DB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -401,6 +405,7 @@
 			isa = PBXGroup;
 			children = (
 				73C335691D62C2730052E646 /* UIImage+Extension.swift */,
+				731DF8261D6AD39D00FA3C6A /* UIView+Extension.swift */,
 			);
 			path = category;
 			sourceTree = SOURCE_ROOT;
@@ -460,6 +465,7 @@
 				732769B11D616EFC001F1FD0 /* LiuqsGifEmoji.plist */,
 				732769AA1D615623001F1FD0 /* LiuqsEmotionKeyBoard.swift */,
 				73C3356B1D62EA7B0052E646 /* LiuqsToolBarView.swift */,
+				731DF8281D6AEADA00FA3C6A /* LiuqsTextAttachment.swift */,
 			);
 			path = LiuqsEmotions;
 			sourceTree = SOURCE_ROOT;
@@ -867,12 +873,14 @@
 				738F6A031D6070860027E39A /* AddViewController.swift in Sources */,
 				738F6A001D60503D0027E39A /* LiuqsPopTransition.swift in Sources */,
 				7372153B1D604C5F00F9B802 /* BaseViewController.swift in Sources */,
+				731DF8291D6AEADA00FA3C6A /* LiuqsTextAttachment.swift in Sources */,
 				73A0C01A1D5854030089F5FD /* ChatListViewCell.swift in Sources */,
 				738F69FE1D6050290027E39A /* LiuqsPushTransition.swift in Sources */,
 				7320DC9A1D5817BD007383DB /* tabBarController.swift in Sources */,
 				73C3356C1D62EA7B0052E646 /* LiuqsToolBarView.swift in Sources */,
 				73A0C00A1D5827990089F5FD /* PersonalViewController.swift in Sources */,
 				73A0C0181D5852690089F5FD /* LiuqsDefines.swift in Sources */,
+				731DF8271D6AD39D00FA3C6A /* UIView+Extension.swift in Sources */,
 				73C3356A1D62C2730052E646 /* UIImage+Extension.swift in Sources */,
 				73276A721D616F44001F1FD0 /* LiuqsTextAttachment.m in Sources */,
 				73A0C0051D58264C0089F5FD /* ChatViewController.swift in Sources */,
