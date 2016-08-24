@@ -671,27 +671,6 @@ class LiuqsEmotionKeyBoard: UIImageView ,UIScrollViewDelegate {
     
     //静态表情的按钮事件
     func insertEmoji(btn:UIButton) {
-        
-        /*LiuqsTextAttachment *emojiTextAttachment = [LiuqsTextAttachment new];
-         
-         emojiTextAttachment.emojiTag = _emojiTags[(NSUInteger) btn.tag - 1];
-         
-         NSString *imageName = [_emojiImages objectForKey:_emojiTags[(NSUInteger) btn.tag - 1]];
-         
-         emojiTextAttachment.image = [UIImage imageNamed:imageName];
-         
-         emojiTextAttachment.emojiSize = CGSizeMake(_EMOJI_MAX_SIZE, _EMOJI_MAX_SIZE);
-         
-         NSAttributedString *attstr = [NSAttributedString attributedStringWithAttachment:emojiTextAttachment];
-         
-         [_IputView.textStorage insertAttributedString:attstr atIndex:_IputView.selectedRange.location];
-         
-         _IputView.selectedRange = NSMakeRange(_IputView.selectedRange.location + 1, _IputView.selectedRange.length);
-         
-         [self emotionBtnDidClick:btn];
-         
-         [self resetTextStyle];
-*/
     
         emotionBtnDidClick(btn: btn)
         
@@ -719,14 +698,6 @@ class LiuqsEmotionKeyBoard: UIImageView ,UIScrollViewDelegate {
     
     func resetTextStyle() {
     
-        /*NSRange wholeRange = NSMakeRange(0, _IputView.textStorage.length);
-         
-         [_IputView.textStorage removeAttribute:NSFontAttributeName range:wholeRange];
-         
-         [_IputView.textStorage addAttribute:NSFontAttributeName value:self.font range:wholeRange];
-         
-         [self.IputView scrollRectToVisible:CGRectMake(0, 0, _IputView.contentSize.width, _IputView.contentSize.height) animated:YES];
-*/
         let wholeRange:NSRange = NSRange.init(location: 0, length: (KeyTextView?.textStorage.length)!)
         
         KeyTextView?.textStorage.removeAttribute(NSFontAttributeName, range: wholeRange)

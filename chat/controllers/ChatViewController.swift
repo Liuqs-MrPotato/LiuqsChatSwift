@@ -9,7 +9,7 @@
 import UIKit
 
 
-class ChatViewController: BaseViewController ,UITableViewDataSource ,UITableViewDelegate{
+class ChatViewController: BaseViewController, UITableViewDataSource, UITableViewDelegate{
     
     var chatList:UITableView?
     
@@ -34,6 +34,8 @@ class ChatViewController: BaseViewController ,UITableViewDataSource ,UITableView
         chatList = UITableView.init(frame: CGRect(x:0,y:64,width:screenW,height:screenH - 108), style: UITableViewStyle.plain)
     
         chatList?.dataSource      = self;
+        
+        chatList?.backgroundColor = BACKGROUND_Color
         
         chatList?.delegate        = self;
         
