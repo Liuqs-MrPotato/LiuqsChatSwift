@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ChatDetailViewController: UIViewController ,LiuqsToolBarDelegate ,UITextViewDelegate ,UITableViewDelegate,UITableViewDataSource , UIGestureRecognizerDelegate , LiuqsEmotionKeyBoardDelegate{
+class ChatDetailViewController: BaseViewController ,LiuqsToolBarDelegate ,UITextViewDelegate ,UITableViewDelegate,UITableViewDataSource, LiuqsEmotionKeyBoardDelegate{
     
     var toolBarView:LiuqsToolBarView = LiuqsToolBarView.init(frame: CGRect())
     
@@ -40,7 +40,7 @@ class ChatDetailViewController: UIViewController ,LiuqsToolBarDelegate ,UITextVi
         super.viewWillAppear(true)
         
         self.tabBarController?.tabBar.isHidden = true
-    
+        
         ScrollTableViewToBottom()
         
     }
@@ -59,7 +59,7 @@ class ChatDetailViewController: UIViewController ,LiuqsToolBarDelegate ,UITextVi
         createExampleData()
         
         initSomething()
-    
+        
         addObsevers()
         
         creatToolBarView()
@@ -69,6 +69,8 @@ class ChatDetailViewController: UIViewController ,LiuqsToolBarDelegate ,UITextVi
     
     func createExampleData() {
     
+        self.usePopGesture = true
+        
         for i: Int in 0...1 {
         
             let chatCellFrame:LiuqsChatCellFrame = LiuqsChatCellFrame()
@@ -344,12 +346,13 @@ class ChatDetailViewController: UIViewController ,LiuqsToolBarDelegate ,UITextVi
         }else if (self.toolBarView.textView.contentSize.height >= 90) {
             
             self.toolBarView.textView.height = 90;
+            
         }else {
             
             self.toolBarView.textView.height = self.toolBarView.textView.contentSize.height;
         }
-        self.toolBarView.height = screenW * 10 / 320 + self.toolBarView.textView.height;
         
+        self.toolBarView.height = screenW * 10 / 320 + self.toolBarView.textView.height;
         
         if (self.keyBoardH < self.emotionview.height) {
             

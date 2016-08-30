@@ -49,7 +49,6 @@ class LiuqsChatCellFrame: NSObject {
         
         //message
         let str:String = (message?.message)!
-        
         let textAtt = LiuqsChageEmotionStrTool.changeStr(string: str, font: UIFont.systemFont(ofSize: 17.0), textColor: UIColor.black)
         message?.attMessage = textAtt
         let maxsize:CGSize = CGSize.init(width: Int(screenW - (iconFrameW + padding * 3) * 2), height: 1000)
@@ -59,6 +58,9 @@ class LiuqsChatCellFrame: NSObject {
         
         cellHeight = textFrame.maxY + padding;
     }
+ 
+    
+    
     
  
     

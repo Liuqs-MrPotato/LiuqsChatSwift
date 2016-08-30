@@ -62,18 +62,18 @@ class LiuqsChatMessageCell: UITableViewCell {
             
             let type:Bool = chatCellFrame?.message?.currentUserType == userType.me
             
-            
             //头像
             let iconName:String = chatCellFrame?.message?.currentUserType == userType.me ? "1" : "2"
             iconImageView.setImage(UIImage.init(named: iconName), for: UIControlState.normal)
             iconImageView.frame = (chatCellFrame?.iconFrame)!
             
             //消息内容
-            
             messageLabel.setAttributedTitle(chatCellFrame?.message?.attMessage, for: UIControlState.normal)
             messageLabel.frame = (chatCellFrame?.textFrame)!
             let messageImageName:String = type ? "chat_receive_nor" : "chat_send_nor"
+            let messageImageNameP:String = type ? "chat_receive_p" : "chat_send_p"
             messageLabel.setBackgroundImage(UIImage.resizebleImage(imageName: messageImageName), for: UIControlState.normal)
+            messageLabel.setBackgroundImage(UIImage.resizebleImage(imageName: messageImageNameP), for: UIControlState.highlighted)
             messageLabel.titleEdgeInsets = type ? UIEdgeInsetsMake(7, 13, 5, 5) : UIEdgeInsetsMake(5, 7, 5, 13)
             
             //名字

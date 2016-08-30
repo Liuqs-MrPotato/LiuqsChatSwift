@@ -8,12 +8,15 @@
 
 import UIKit
 
-class BaseViewController: UIViewController,LiuqsTabBarDelegate,UINavigationControllerDelegate {
+class BaseViewController: UIViewController,LiuqsTabBarDelegate,UINavigationControllerDelegate,UIGestureRecognizerDelegate{
+    
+    public var usePopGesture:Bool = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-       self.navigationController?.navigationBar.barStyle = UIBarStyle.black 
+        self.navigationController?.navigationBar.barStyle = UIBarStyle.black
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -25,6 +28,10 @@ class BaseViewController: UIViewController,LiuqsTabBarDelegate,UINavigationContr
         self.navigationController?.delegate = self
         
         tabbarController.Delegate = self
+        
+        self.navigationController?.interactivePopGestureRecognizer?.isEnabled = true;
+        
+        self.navigationController?.interactivePopGestureRecognizer?.delegate = self;
     }
     
     func composeBtnClicked() {
@@ -48,6 +55,12 @@ class BaseViewController: UIViewController,LiuqsTabBarDelegate,UINavigationContr
         
             return nil
         }
+    }
+    
+    func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
+        
+        return self.usePopGesture
+        
     }
 
 }
