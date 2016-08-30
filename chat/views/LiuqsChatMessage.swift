@@ -18,6 +18,7 @@ enum userType {
 
 class LiuqsChatMessage: NSObject {
     
+    var userName:String = String()
     
     var message:String  = String()
     

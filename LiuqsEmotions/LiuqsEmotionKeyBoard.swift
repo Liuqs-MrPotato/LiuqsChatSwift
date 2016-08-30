@@ -572,6 +572,10 @@ class LiuqsEmotionKeyBoard: UIImageView ,UIScrollViewDelegate {
         sendBtn.setBackgroundImage(UIImage.createImageWithColor(color: UIColor.lightGray), for: UIControlState.normal)
         
         sendBtn.isSelected = true
+        
+        sendBtn.tag = 44
+        
+        sendBtn.addTarget(self, action:  #selector(emotionBtnDidClick(btn:)), for: UIControlEvents.touchUpInside)
     
         btnsBar.addSubview(sendBtn)
         

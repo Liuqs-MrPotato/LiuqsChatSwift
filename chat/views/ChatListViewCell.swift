@@ -29,8 +29,11 @@ class ChatListViewCell: UITableViewCell {
     private func prepareUI() {
         
         addSubview(iconImage)
+        
         addSubview(nameLabel)
+        
         layout()
+        
         initSomething()
     }
     

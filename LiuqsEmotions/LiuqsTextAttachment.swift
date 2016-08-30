@@ -20,3 +20,32 @@ class LiuqsTextAttachment: NSTextAttachment {
     }
     
 }
+
+extension NSAttributedString {
+    
+
+    func getPlainString() -> String {
+    
+         let plainString = NSMutableString.init(string: self.string)
+        
+        var base:Int = 0
+        
+        self .enumerateAttribute(NSAttachmentAttributeName, in: NSRange.init(location: 0, length: self.length), options: []) { (value, range:NSRange, stop) in
+            
+            if (value != nil) {
+            
+                let emoji:LiuqsTextAttachment = value as! LiuqsTextAttachment
+                
+                print(base,emoji.emojiTag)
+                
+                plainString.replaceCharacters(in: NSRange.init(location: range.location + base, length: range.length), with: emoji.emojiTag)
+                
+                base = base + Int(emoji.emojiTag.characters.count - 1)
+            }
+        }
+        
+       return plainString as String
+    }
+
+    
+}

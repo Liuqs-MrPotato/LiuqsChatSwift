@@ -27,6 +27,55 @@ extension UIImage {
         UIGraphicsEndImageContext()
         
         return image
+    }
+    
+    
+    static func resizebleImage(imageName:String) -> UIImage {
+    
+        var imageNor = UIImage.init(named: imageName)
         
+        let w = imageNor?.size.width
+        
+        let h = imageNor?.size.height
+        
+        imageNor = imageNor?.resizableImage(withCapInsets: UIEdgeInsetsMake(w! * 0.5, h! * 0.5, w! * 0.5, h! * 0.5), resizingMode: UIImageResizingMode.stretch)
+        
+        return imageNor!
+    }
+    
+    static func animationImage(gifName:String) -> UIImage {
+        
+       return UIImage()
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
