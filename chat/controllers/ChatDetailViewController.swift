@@ -68,8 +68,6 @@ class ChatDetailViewController: BaseViewController ,LiuqsToolBarDelegate ,UIText
     }
     
     func createExampleData() {
-    
-        self.usePopGesture = true
         
         for i: Int in 0...1 {
         
@@ -96,7 +94,6 @@ class ChatDetailViewController: BaseViewController ,LiuqsToolBarDelegate ,UIText
             
             dataSource.add(chatCellFrame)
         }
-        
     }
 
     // 初始化一些数据
@@ -105,6 +102,8 @@ class ChatDetailViewController: BaseViewController ,LiuqsToolBarDelegate ,UIText
         self.view.backgroundColor = BACKGROUND_Color
         
         self.automaticallyAdjustsScrollViewInsets = false
+        
+        self.title = "路飞"
     
     }
     

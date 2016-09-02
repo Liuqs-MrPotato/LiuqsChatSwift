@@ -9,8 +9,6 @@
 import UIKit
 
 class BaseViewController: UIViewController,LiuqsTabBarDelegate,UINavigationControllerDelegate,UIGestureRecognizerDelegate{
-    
-    public var usePopGesture:Bool = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -59,7 +57,13 @@ class BaseViewController: UIViewController,LiuqsTabBarDelegate,UINavigationContr
     
     func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
         
-        return self.usePopGesture
+        if self.navigationController?.viewControllers.count > 1 {
+            
+            return true
+        } else {
+        
+            return false
+        }
         
     }
 

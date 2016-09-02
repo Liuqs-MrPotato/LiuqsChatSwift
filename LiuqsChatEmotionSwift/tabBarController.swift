@@ -47,7 +47,7 @@ class tabBarController: UITabBarController {
     
     /// 批量添加子控制器
     private func addChildViewControllers() {
-        
+
         addChildViewController(ChatViewController(), title: "聊天", itemIcon: "tabbar_message_center")
         
         addChildViewController(HomeTableViewController(), title: "首页", itemIcon: "tabbar_home")
@@ -69,12 +69,12 @@ class tabBarController: UITabBarController {
         
         if title == "compose" {vc.tabBarItem.isEnabled = false; vc.title = ""}
         
-        let nav = UINavigationController(rootViewController: vc)
-        
         let dic = [NSForegroundColorAttributeName:UIColor.white]
         
-        nav.navigationBar.titleTextAttributes = dic
+        let nav = UINavigationController(rootViewController: vc)
         
+        nav.navigationBar.titleTextAttributes = dic
+    
         addChildViewController(nav)
         
     }
