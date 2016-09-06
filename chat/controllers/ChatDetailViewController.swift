@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ChatDetailViewController: BaseViewController ,LiuqsToolBarDelegate ,UITextViewDelegate ,UITableViewDelegate,UITableViewDataSource, LiuqsEmotionKeyBoardDelegate{
+class ChatDetailViewController: UIViewController ,LiuqsToolBarDelegate ,UITextViewDelegate ,UITableViewDelegate,UITableViewDataSource, LiuqsEmotionKeyBoardDelegate, UIGestureRecognizerDelegate{
     
     var toolBarView:LiuqsToolBarView = LiuqsToolBarView.init(frame: CGRect())
     
@@ -110,7 +110,7 @@ class ChatDetailViewController: BaseViewController ,LiuqsToolBarDelegate ,UIText
     //创建tabbleView
     func initChatTableView() {
         
-        tableView = UITableView.init(frame: CGRect.init(x: 0, y: 64, width: screenW, height: toolBarView.y - 64))
+        tableView = UITableView.init(frame: CGRect.init(x: 0, y: 0, width: screenW, height: toolBarView.y))
         
         tableView.backgroundColor = BACKGROUND_Color
         
@@ -161,7 +161,7 @@ class ChatDetailViewController: BaseViewController ,LiuqsToolBarDelegate ,UIText
             
                 self.emotionview.frame = emotionDownFrame
                 
-                self.toolBarView.frame = CGRect.init(x: 0, y: screenH - self.toolBarView.frame.size.height, width: screenW, height: self.toolBarView.frame.size.height)
+                self.toolBarView.frame = CGRect.init(x: 0, y: screenH - self.toolBarView.frame.size.height - 64, width: screenW, height: self.toolBarView.frame.size.height)
             
                 self.resetChatList()
             })
@@ -213,7 +213,7 @@ class ChatDetailViewController: BaseViewController ,LiuqsToolBarDelegate ,UIText
             
             self.toolBarView.toolBarEmotionBtn.isSelected = false
             
-            self.toolBarView.frame = CGRect.init(x: 0, y: screenH - self.toolBarView.height - keyBoardFrame.size.height, width: screenW, height: self.toolBarView.height)
+            self.toolBarView.frame = CGRect.init(x: 0, y: screenH - self.toolBarView.height - keyBoardFrame.size.height - 64, width: screenW, height: self.toolBarView.height)
             
             self.emotionview.frame = emotionUpFrame
             
@@ -230,7 +230,7 @@ class ChatDetailViewController: BaseViewController ,LiuqsToolBarDelegate ,UIText
         
         UIView.animate(withDuration: emotionTipTime, animations: {
             
-            self.toolBarView.frame = CGRect.init(x: 0, y: screenH - self.toolBarView.height - self.emotionview.height, width: screenW, height: self.toolBarView.height)
+            self.toolBarView.frame = CGRect.init(x: 0, y: screenH - self.toolBarView.height - self.emotionview.height - 64, width: screenW, height: self.toolBarView.height)
             
             self.resetChatList()
         })
@@ -303,7 +303,7 @@ class ChatDetailViewController: BaseViewController ,LiuqsToolBarDelegate ,UIText
                 
                 self.emotionview.frame = emotionUpFrame
                 
-                self.toolBarView.frame = CGRect.init(x: 0, y: screenH - self.toolBarView.height - self.emotionview.height, width: screenW, height: self.toolBarView.height)
+                self.toolBarView.frame = CGRect.init(x: 0, y: screenH - self.toolBarView.height - self.emotionview.height - 64, width: screenW, height: self.toolBarView.height)
                 
                 self.resetChatList()
             })
@@ -317,13 +317,13 @@ class ChatDetailViewController: BaseViewController ,LiuqsToolBarDelegate ,UIText
         //判断是否滚动到底部，会有一个误差值
         if tableView.contentOffset.y > offSetY - 5 || tableView.contentOffset.y > offSetY + 5 {
             
-            self.tableView.frame = CGRect.init(x: 0, y: self.tableView.y, width: screenW, height: self.toolBarView.y - 64)
+            self.tableView.frame = CGRect.init(x: 0, y: self.tableView.y, width: screenW, height: self.toolBarView.y)
             
             ScrollTableViewToBottom()
             
         }else {
             
-            self.tableView.frame = CGRect.init(x: 0, y: self.tableView.y, width: screenW, height: self.toolBarView.y - 64)
+            self.tableView.frame = CGRect.init(x: 0, y: self.tableView.y, width: screenW, height: self.toolBarView.y)
         }
     }
     
@@ -355,11 +355,11 @@ class ChatDetailViewController: BaseViewController ,LiuqsToolBarDelegate ,UIText
         
         if (self.keyBoardH < self.emotionview.height) {
             
-            self.toolBarView.y = screenH - self.toolBarView.height - self.emotionview.height;
+            self.toolBarView.y = screenH - self.toolBarView.height - self.emotionview.height - 64;
             
         }else {
             
-            self.toolBarView.y = screenH - self.toolBarView.height - self.keyBoardH;
+            self.toolBarView.y = screenH - self.toolBarView.height - self.keyBoardH - 64;
         }
         if (textView.text.characters.count > 0) {
             
@@ -369,8 +369,8 @@ class ChatDetailViewController: BaseViewController ,LiuqsToolBarDelegate ,UIText
             
             self.emotionview.sendBtn.isSelected = false;
         }
-        
-        self.tableView.height = self.toolBarView.y - 64
+    
+        self.tableView.height = self.toolBarView.y
     }
     
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {

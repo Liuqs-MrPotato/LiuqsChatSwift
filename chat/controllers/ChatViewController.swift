@@ -9,7 +9,7 @@
 import UIKit
 
 
-class ChatViewController: BaseViewController, UITableViewDataSource, UITableViewDelegate{
+class ChatViewController: UIViewController, UITableViewDataSource, UITableViewDelegate{
     
     var chatList:UITableView?
     
@@ -19,11 +19,12 @@ class ChatViewController: BaseViewController, UITableViewDataSource, UITableView
         self.createTableView()
         
         self.initSomething()
+        
     }
     
     func initSomething() {
     
-        self.view.backgroundColor = UIColor.lightGray
+        self.view.backgroundColor = BACKGROUND_Color
         
         self.automaticallyAdjustsScrollViewInsets = false
     }
@@ -31,7 +32,7 @@ class ChatViewController: BaseViewController, UITableViewDataSource, UITableView
    
     func createTableView(){
         
-        chatList = UITableView.init(frame: CGRect(x:0,y:64,width:screenW,height:screenH - 108), style: UITableViewStyle.plain)
+        chatList = UITableView.init(frame: CGRect(x:0,y:0,width:screenW,height:screenH - 108), style: UITableViewStyle.plain)
     
         chatList?.dataSource      = self;
         
@@ -52,7 +53,7 @@ class ChatViewController: BaseViewController, UITableViewDataSource, UITableView
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        return 1
+        return 10
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -77,6 +78,16 @@ class ChatViewController: BaseViewController, UITableViewDataSource, UITableView
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         
         cell.separatorInset = UIEdgeInsets.zero;
+    }
+    
+    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+        
+        let deleteAction:UITableViewRowAction = UITableViewRowAction.init(style: UITableViewRowActionStyle.default, title: "删除") { (deleteAction, IndexPath) in
+            
+            
+        }
+        
+        return [deleteAction]
     }
     
 }

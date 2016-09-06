@@ -8,7 +8,7 @@
 
 import UIKit
 
-class DiscoverTableViewController: BaseViewController{
+class DiscoverTableViewController: UIViewController{
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -18,7 +18,7 @@ class DiscoverTableViewController: BaseViewController{
     
     func initSomething() {
         
-        self.view.backgroundColor = UIColor.lightGray;
+        self.view.backgroundColor = UIColor.white;
 }
 
 }

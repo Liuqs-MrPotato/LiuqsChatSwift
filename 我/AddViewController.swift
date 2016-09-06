@@ -27,8 +27,6 @@ class AddViewController: UIViewController,UINavigationControllerDelegate {
         
         self.navigationController?.delegate = self
         
-        self.tabBarController?.tabBar.alpha = 0
-        
         UIView.animate(withDuration: 0.4) {
             
             self.navigationController?.navigationBar.alpha = 0
@@ -37,8 +35,6 @@ class AddViewController: UIViewController,UINavigationControllerDelegate {
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillAppear(true)
-        
-        self.tabBarController?.tabBar.alpha = 1.0
         
         UIView.animate(withDuration: 0.4) {
             
@@ -72,7 +68,7 @@ class AddViewController: UIViewController,UINavigationControllerDelegate {
     
         let btn:UIButton = UIButton.init(frame: CGRect.init(x: X, y: Y, width: 44, height: 44))
         
-        btn.backgroundColor = UIColor.lightGray
+        btn.backgroundColor = UIColor.clear
         
         CancelBtn = btn
         
@@ -87,25 +83,27 @@ class AddViewController: UIViewController,UINavigationControllerDelegate {
     }
     
     func addtransAnimation() {
+        
+        UIView.animate(withDuration: 0.4) {
+           
+            self.CancelBtn.transform = CGAffineTransform(rotationAngle: CGFloat(M_PI_2 * 0.5));
+        }
+    }
     
-        let transAniamtion:CABasicAnimation = CABasicAnimation.init(keyPath: "transform.rotation.z")
-        
-        transAniamtion.toValue = NSNumber.init(value: M_PI_2 * 0.5)
-        
-        transAniamtion.duration = 0.4
-        
-        transAniamtion.repeatCount = 0
-        
-        transAniamtion.isRemovedOnCompletion = false;
-        
-        transAniamtion.fillMode = kCAFillModeForwards
-        
-        CancelBtn.layer.add(transAniamtion, forKey: "trans")
+    func addFtransAnimation() {
+     
+        UIView.animate(withDuration: 0.4) {
+            
+            self.CancelBtn.transform = CGAffineTransform(rotationAngle: CGFloat(-M_PI_2 * 0.5));
+        }
+
     }
     
     func cancelBtnClick(btn:UIButton) {
     
         self.navigationController?.popViewController(animated: true)
+        
+        addFtransAnimation()
         
     }
     
@@ -115,9 +113,7 @@ class AddViewController: UIViewController,UINavigationControllerDelegate {
             
             let pushTran:LiuqsPopTransition = LiuqsPopTransition()
             
-            let tabbarControl:tabBarController = self.tabBarController as! tabBarController
-            
-            pushTran.btnRect = tabbarControl.composeRect
+            pushTran.btnRect = CGRect.init(x: (screenW - 44) * 0.5, y: screenH - 44, width: 44, height: 44)
             
             return pushTran
         }else {

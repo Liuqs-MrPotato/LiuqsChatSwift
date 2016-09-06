@@ -8,7 +8,7 @@
 
 import UIKit
 
-class PersonalViewController: BaseViewController {
+class PersonalViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -18,7 +18,7 @@ class PersonalViewController: BaseViewController {
     
     func initSomething() {
         
-        self.view.backgroundColor = UIColor.lightGray
+        self.view.backgroundColor = UIColor.white
 
     }
 }

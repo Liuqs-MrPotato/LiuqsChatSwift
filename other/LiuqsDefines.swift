@@ -18,6 +18,8 @@ let BLUE_Color:UIColor            = UIColor(red: 22.0 / 255.0, green: 128.0 / 25
 
 let BACKGROUND_Color:UIColor      = UIColor(red: 235.0 / 255.0, green: 235.0 / 255.0, blue: 235.0 / 255.0, alpha: 1.0)
 
+let navColor:UIColor              = UIColor.init(red: 57 / 255, green: 56 / 255, blue: 54 / 255, alpha: 1.0)
+
 
 ///toolbar
 let toobarH:CGFloat     = screenW * 44 / 320
@@ -32,16 +34,16 @@ let emotionBtnH:CGFloat = screenW * 34 / 320
 
 let emotionBtnX:CGFloat = screenW - (screenW * 40 / 320)
 
-let toolBarFrameDown    = CGRect(x:0, y:screenH - toobarH, width:screenW, height:toobarH)
+let toolBarFrameDown    = CGRect(x:0, y:screenH - toobarH - 64, width:screenW, height:toobarH)
 
-let toolBarFrameUPBaseEmotion = CGRect(x:0, y:screenH - toobarH - EMOJI_KEYBOARD_HEIGHT, width:screenW, height:toobarH)
+let toolBarFrameUPBaseEmotion = CGRect(x:0, y:screenH - toobarH - EMOJI_KEYBOARD_HEIGHT - 64, width:screenW, height:toobarH)
 
 let Vgap:CGFloat = screenW * 5 / 320
 
 let Lgap:CGFloat = screenW * 10 / 320
 
 ///emotionView
-let emotionUpFrame:CGRect  = CGRect.init(x: 0, y: screenH - (EMOJI_KEYBOARD_HEIGHT), width: screenW, height: EMOJI_KEYBOARD_HEIGHT)
+let emotionUpFrame:CGRect  = CGRect.init(x: 0, y: screenH - (EMOJI_KEYBOARD_HEIGHT) - 64, width: screenW, height: EMOJI_KEYBOARD_HEIGHT)
 
 let emotionDownFrame       = CGRect.init(x: 0, y: screenH, width: screenW, height: EMOJI_KEYBOARD_HEIGHT)
 

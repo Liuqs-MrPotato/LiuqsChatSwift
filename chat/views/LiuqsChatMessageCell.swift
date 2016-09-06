@@ -39,6 +39,7 @@ class LiuqsChatMessageCell: UITableViewCell {
     func prepareUI() {
 
         self.backgroundColor = BACKGROUND_Color
+        
         //头像
         iconImageView.layer.cornerRadius  = 5
         iconImageView.layer.masksToBounds = true

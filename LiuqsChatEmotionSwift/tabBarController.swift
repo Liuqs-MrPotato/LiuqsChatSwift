@@ -13,24 +13,44 @@ protocol LiuqsTabBarDelegate {
     func composeBtnClicked()
 }
 
-class tabBarController: UITabBarController {
+class tabBarController: UITabBarController,UITabBarControllerDelegate, UINavigationControllerDelegate{
     
     var composeRect:CGRect = CGRect()
     
     var Delegate:LiuqsTabBarDelegate?
     
+    override func viewWillAppear(_ animated: Bool) {
+        
+        self.navigationController?.delegate = self
+        
+    }
+    
     override func viewDidLoad() {
+        
         super.viewDidLoad()
         
         addChildViewControllers()
         
         addcomposedBtn()
+        
+        configureNav()
+        
+    }
+    
+  func configureNav() {
+    
+        self.navigationItem.title = "聊天"
+    
+        self.navigationController?.delegate = self
+    
+        self.automaticallyAdjustsScrollViewInsets = false
     }
     
     /// 中间按钮的点击事件
     func clickcomposedBtn() {
         
-        Delegate?.composeBtnClicked()
+        self.navigationController?.pushViewController(AddViewController(), animated: true)
+        
     }
     
     /// 添加中间按钮
@@ -59,6 +79,8 @@ class tabBarController: UITabBarController {
         addChildViewController(PersonalViewController(), title: "我", itemIcon: "tabbar_profile")
     }
     
+    
+    
     /// 添加视图控制；
     private func addChildViewController(_ vc:UIViewController,title:String,itemIcon:String) {
         
@@ -75,7 +97,7 @@ class tabBarController: UITabBarController {
         
         nav.navigationBar.titleTextAttributes = dic
     
-        addChildViewController(nav)
+        addChildViewController(vc)
         
     }
     
@@ -94,4 +116,41 @@ class tabBarController: UITabBarController {
         
         return composedBtn
     }()
+    
+    func navigationController(_ navigationController: UINavigationController, animationControllerFor operation: UINavigationControllerOperation, from fromVC: UIViewController, to toVC: UIViewController) -> UIViewControllerAnimatedTransitioning?{
+        
+        if operation == UINavigationControllerOperation.push && toVC.isKind(of: AddViewController().classForCoder) {
+            
+            let pushTran:LiuqsPushTransition = LiuqsPushTransition()
+            
+            pushTran.btnRect = self.composeRect
+            
+            return pushTran
+        }else {
+            
+            return nil
+        }
+    }
+    
+    func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
+        
+        if viewController.isKind(of: ChatViewController.classForCoder()) {
+            
+            self.navigationItem.title = "聊天"
+            
+        }else if viewController.isKind(of: HomeTableViewController.classForCoder()) {
+            
+            self.navigationItem.title = "首页"
+        
+        }else if viewController.isKind(of: DiscoverTableViewController.classForCoder()) {
+            
+            self.navigationItem.title = "发现"
+            
+        }else if viewController.isKind(of: PersonalViewController.classForCoder()) {
+            
+            self.navigationItem.title = "我"
+            
+        }
+    }
+    
 }

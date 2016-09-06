@@ -26,8 +26,6 @@ class LiuqsChatCellFrame: NSObject {
     
     private let iconH:CGFloat    = 50.0
     
-    
-    
     var message:LiuqsChatMessage? {
     
         didSet {computeFrames()}
@@ -58,13 +56,5 @@ class LiuqsChatCellFrame: NSObject {
         
         cellHeight = textFrame.maxY + padding;
     }
- 
-    
-    
-    
- 
-    
-    
-    
     
 }
