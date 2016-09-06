@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ChatDetailViewController: UIViewController ,LiuqsToolBarDelegate ,UITextViewDelegate ,UITableViewDelegate,UITableViewDataSource, LiuqsEmotionKeyBoardDelegate, UIGestureRecognizerDelegate{
+class ChatDetailViewController: UIViewController ,LiuqsToolBarDelegate ,UITextViewDelegate ,UITableViewDelegate,UITableViewDataSource, LiuqsEmotionKeyBoardDelegate, UIGestureRecognizerDelegate, UINavigationControllerDelegate{
     
     var toolBarView:LiuqsToolBarView = LiuqsToolBarView.init(frame: CGRect())
     
@@ -40,6 +40,8 @@ class ChatDetailViewController: UIViewController ,LiuqsToolBarDelegate ,UITextVi
         super.viewWillAppear(true)
         
         self.tabBarController?.tabBar.isHidden = true
+        
+        self.navigationController?.delegate = self
         
         ScrollTableViewToBottom()
         

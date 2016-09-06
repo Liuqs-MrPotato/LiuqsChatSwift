@@ -54,7 +54,6 @@ class LiuqsChatMessageCell: UITableViewCell {
         nameLabel.textColor = UIColor.orange
         contentView.addSubview(nameLabel)
         
-        
     }
     
     var chatCellFrame:LiuqsChatCellFrame? {
