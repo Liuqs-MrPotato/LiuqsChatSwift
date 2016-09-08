@@ -13,7 +13,7 @@ protocol LiuqsTabBarDelegate {
     func composeBtnClicked()
 }
 
-class tabBarController: UITabBarController,UITabBarControllerDelegate, UINavigationControllerDelegate{
+class tabBarController: UITabBarController,UITabBarControllerDelegate, UIViewControllerTransitioningDelegate {
     
     var composeRect:CGRect = CGRect()
     
@@ -21,8 +21,9 @@ class tabBarController: UITabBarController,UITabBarControllerDelegate, UINavigat
     
     override func viewWillAppear(_ animated: Bool) {
         
-        self.navigationController?.delegate = self
+        super.viewWillAppear(true)
         
+        self.transitioningDelegate = self
     }
     
     override func viewDidLoad() {
@@ -41,15 +42,17 @@ class tabBarController: UITabBarController,UITabBarControllerDelegate, UINavigat
     
         self.navigationItem.title = "聊天"
     
-        self.navigationController?.delegate = self
-    
         self.automaticallyAdjustsScrollViewInsets = false
     }
     
     /// 中间按钮的点击事件
     func clickcomposedBtn() {
         
-        self.navigationController?.pushViewController(AddViewController(), animated: true)
+        let addVC = AddViewController()
+        
+        addVC.transitioningDelegate = self
+        
+        self.present(addVC, animated: true, completion: {})
         
     }
     
@@ -95,9 +98,11 @@ class tabBarController: UITabBarController,UITabBarControllerDelegate, UINavigat
         
         let nav = UINavigationController(rootViewController: vc)
         
+        nav.navigationBar.barStyle = UIBarStyle.black
+        
         nav.navigationBar.titleTextAttributes = dic
-    
-        addChildViewController(vc)
+        
+        addChildViewController(nav)
         
     }
     
@@ -117,40 +122,22 @@ class tabBarController: UITabBarController,UITabBarControllerDelegate, UINavigat
         return composedBtn
     }()
     
-    func navigationController(_ navigationController: UINavigationController, animationControllerFor operation: UINavigationControllerOperation, from fromVC: UIViewController, to toVC: UIViewController) -> UIViewControllerAnimatedTransitioning?{
+    func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         
-        if operation == UINavigationControllerOperation.push && toVC.isKind(of: AddViewController().classForCoder) {
-            
-            let pushTran:LiuqsPushTransition = LiuqsPushTransition()
-            
-            pushTran.btnRect = self.composeRect
-            
-            return pushTran
-        }else {
-            
-            return nil
-        }
+        let pushTran:LiuqsPushTransition = LiuqsPushTransition()
+        
+        pushTran.btnRect = self.composeRect
+        
+        return pushTran
     }
     
-    func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
+    func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         
-        if viewController.isKind(of: ChatViewController.classForCoder()) {
-            
-            self.navigationItem.title = "聊天"
-            
-        }else if viewController.isKind(of: HomeTableViewController.classForCoder()) {
-            
-            self.navigationItem.title = "首页"
+        let pushTran:LiuqsPopTransition = LiuqsPopTransition()
         
-        }else if viewController.isKind(of: DiscoverTableViewController.classForCoder()) {
-            
-            self.navigationItem.title = "发现"
-            
-        }else if viewController.isKind(of: PersonalViewController.classForCoder()) {
-            
-            self.navigationItem.title = "我"
-            
-        }
+        pushTran.btnRect = CGRect.init(x: (screenW - 44) * 0.5, y: screenH - 44, width: 44, height: 44)
+        
+        return pushTran
+        
     }
-    
 }

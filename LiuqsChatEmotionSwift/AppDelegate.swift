@@ -20,15 +20,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         UITabBar.appearance().tintColor = UIColor.orange
         
-        let nav:UINavigationController = UINavigationController.init(rootViewController: tabBarController())
-        
-        nav.navigationBar.barStyle = UIBarStyle.black
-        
-        nav.navigationBar.setBackgroundImage(UIImage.createImageWithColor(color: navColor), for: UIBarMetrics.default)
-        
         window = UIWindow(frame: UIScreen.main.bounds)
         
-        window?.rootViewController = nav
+        window?.backgroundColor = BACKGROUND_Color
+        
+        window?.rootViewController = tabBarController()
         
         window?.makeKeyAndVisible()
         

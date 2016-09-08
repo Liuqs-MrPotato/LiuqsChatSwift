@@ -1,41 +1,42 @@
 //
-//  AddViewController.swift
+//  PresentViewController.swift
 //  LiuqsChatEmotionSwift
 //
-//  Created by 刘全水 on 16/8/14.
+//  Created by 刘全水 on 16/9/8.
 //  Copyright © 2016年 刘全水. All rights reserved.
 //
 
 import UIKit
 
-class AddViewController: UIViewController,UINavigationControllerDelegate {
-    
-    var CancelBtn:UIButton = UIButton.init()
+class PresentViewController: UIViewController, UINavigationControllerDelegate{
 
+    var CancelBtn:UIButton = UIButton.init()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         initSomething()
         createCancelBtn()
-//        creatEffectView()
         
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-
+        
         addtransAnimation()
+        
+        self.navigationController?.delegate = self
         
         self.navigationController?.navigationBar.isHidden = true;
         
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
-    
+        
         return UIStatusBarStyle.lightContent
     }
     
-
+    
     func initSomething() {
         
         self.view.backgroundColor = BLUE_Color
@@ -43,7 +44,7 @@ class AddViewController: UIViewController,UINavigationControllerDelegate {
     }
     
     func creatEffectView() {
-    
+        
         let lightBlur = UIBlurEffect(style: UIBlurEffectStyle.light)
         
         let blurView = UIVisualEffectView(effect: lightBlur)
@@ -59,7 +60,7 @@ class AddViewController: UIViewController,UINavigationControllerDelegate {
         let X:CGFloat = (screenW - 44) * 0.5
         
         let Y:CGFloat = screenH - 44
-    
+        
         let btn:UIButton = UIButton.init(frame: CGRect.init(x: X, y: Y, width: 44, height: 44))
         
         btn.backgroundColor = UIColor.clear
@@ -79,25 +80,35 @@ class AddViewController: UIViewController,UINavigationControllerDelegate {
     func addtransAnimation() {
         
         UIView.animate(withDuration: 0.4) {
-           
+            
             self.CancelBtn.transform = CGAffineTransform(rotationAngle: CGFloat(M_PI_2 * 0.5));
         }
     }
     
     func addFtransAnimation() {
-     
+        
         UIView.animate(withDuration: 0.4) {
             
             self.CancelBtn.transform = CGAffineTransform(rotationAngle: CGFloat(-M_PI_2 * 0.5));
         }
-
+        
     }
     
     func cancelBtnClick(btn:UIButton) {
-    
-        self.dismiss(animated: true, completion: nil)
+        
+        self.navigationController?.popViewController(animated: true)
         
         addFtransAnimation()
         
     }
+    
+    func navigationController(_ navigationController: UINavigationController, animationControllerFor operation: UINavigationControllerOperation, from fromVC: UIViewController, to toVC: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        
+        let pushTran:LiuqsPopTransition = LiuqsPopTransition()
+        
+        pushTran.btnRect = CGRect.init(x: (screenW - 44) * 0.5, y: screenH - 44, width: 44, height: 44)
+        
+        return pushTran
+    }
+
 }

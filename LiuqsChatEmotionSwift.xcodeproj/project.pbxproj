@@ -133,6 +133,7 @@
 		738F69FE1D6050290027E39A /* LiuqsPushTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 738F69FD1D6050290027E39A /* LiuqsPushTransition.swift */; };
 		738F6A001D60503D0027E39A /* LiuqsPopTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 738F69FF1D60503D0027E39A /* LiuqsPopTransition.swift */; };
 		738F6A031D6070860027E39A /* AddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 738F6A021D6070860027E39A /* AddViewController.swift */; };
+		739010F81D810AEF00F22BCF /* PresentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 739010F71D810AEF00F22BCF /* PresentViewController.swift */; };
 		7395BCA21D73DF7300D93493 /* LiuqsChageEmotionStrTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7395BCA11D73DF7300D93493 /* LiuqsChageEmotionStrTool.swift */; };
 		73A0C0051D58264C0089F5FD /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A0C0041D58264C0089F5FD /* ChatViewController.swift */; };
 		73A0C0071D58265D0089F5FD /* ChatDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A0C0061D58265D0089F5FD /* ChatDetailViewController.swift */; };
@@ -296,6 +297,7 @@
 		738F69FD1D6050290027E39A /* LiuqsPushTransition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LiuqsPushTransition.swift; path = ../LiuqsChatEmotionSwift/LiuqsPushTransition.swift; sourceTree = "<group>"; };
 		738F69FF1D60503D0027E39A /* LiuqsPopTransition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LiuqsPopTransition.swift; path = ../LiuqsChatEmotionSwift/LiuqsPopTransition.swift; sourceTree = "<group>"; };
 		738F6A021D6070860027E39A /* AddViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddViewController.swift; sourceTree = "<group>"; };
+		739010F71D810AEF00F22BCF /* PresentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PresentViewController.swift; sourceTree = "<group>"; };
 		7395BCA11D73DF7300D93493 /* LiuqsChageEmotionStrTool.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LiuqsChageEmotionStrTool.swift; sourceTree = "<group>"; };
 		73A0C0041D58264C0089F5FD /* ChatViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
 		73A0C0061D58265D0089F5FD /* ChatDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatDetailViewController.swift; sourceTree = "<group>"; };
@@ -623,6 +625,7 @@
 				73A0C0111D5832420089F5FD /* HomeTableViewController.swift */,
 				73A0C0131D5832520089F5FD /* DiscoverTableViewController.swift */,
 				738F6A021D6070860027E39A /* AddViewController.swift */,
+				739010F71D810AEF00F22BCF /* PresentViewController.swift */,
 			);
 			path = "我";
 			sourceTree = SOURCE_ROOT;
@@ -889,6 +892,7 @@
 				7320DC9A1D5817BD007383DB /* tabBarController.swift in Sources */,
 				73C3356C1D62EA7B0052E646 /* LiuqsToolBarView.swift in Sources */,
 				73A0C00A1D5827990089F5FD /* PersonalViewController.swift in Sources */,
+				739010F81D810AEF00F22BCF /* PresentViewController.swift in Sources */,
 				733EBFC11D6BEAA000EEA2F3 /* LiuqsChatMessageCell.swift in Sources */,
 				73A0C0181D5852690089F5FD /* LiuqsDefines.swift in Sources */,
 				731DF8271D6AD39D00FA3C6A /* UIView+Extension.swift in Sources */,

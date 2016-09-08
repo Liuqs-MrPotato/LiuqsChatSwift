@@ -27,19 +27,10 @@ class ChatDetailViewController: UIViewController ,LiuqsToolBarDelegate ,UITextVi
         return emotionview
     }()
     
-    override func viewWillDisappear(_ animated: Bool) {
-        
-        super.viewWillDisappear(true)
-        
-        self.tabBarController?.tabBar.isHidden = false
-        
-    }
     
     override func viewWillAppear(_ animated: Bool) {
         
         super.viewWillAppear(true)
-        
-        self.tabBarController?.tabBar.isHidden = true
         
         self.navigationController?.delegate = self
         
@@ -48,7 +39,7 @@ class ChatDetailViewController: UIViewController ,LiuqsToolBarDelegate ,UITextVi
     }
     
     override func viewDidAppear(_ animated: Bool) {
-       
+        
         self.view.addSubview(self.emotionview)
         
         self.emotionview.KeyTextView = self.toolBarView.textView;
@@ -106,13 +97,12 @@ class ChatDetailViewController: UIViewController ,LiuqsToolBarDelegate ,UITextVi
         self.automaticallyAdjustsScrollViewInsets = false
         
         self.title = "路飞"
-    
     }
     
     //创建tabbleView
     func initChatTableView() {
         
-        tableView = UITableView.init(frame: CGRect.init(x: 0, y: 0, width: screenW, height: toolBarView.y))
+        tableView = UITableView.init(frame: CGRect.init(x: 0, y: 64, width: screenW, height: screenH - toobarH - 64))
         
         tableView.backgroundColor = BACKGROUND_Color
         
@@ -163,7 +153,7 @@ class ChatDetailViewController: UIViewController ,LiuqsToolBarDelegate ,UITextVi
             
                 self.emotionview.frame = emotionDownFrame
                 
-                self.toolBarView.frame = CGRect.init(x: 0, y: screenH - self.toolBarView.frame.size.height - 64, width: screenW, height: self.toolBarView.frame.size.height)
+                self.toolBarView.frame = CGRect.init(x: 0, y: screenH - self.toolBarView.frame.size.height, width: screenW, height: self.toolBarView.frame.size.height)
             
                 self.resetChatList()
             })
@@ -215,7 +205,7 @@ class ChatDetailViewController: UIViewController ,LiuqsToolBarDelegate ,UITextVi
             
             self.toolBarView.toolBarEmotionBtn.isSelected = false
             
-            self.toolBarView.frame = CGRect.init(x: 0, y: screenH - self.toolBarView.height - keyBoardFrame.size.height - 64, width: screenW, height: self.toolBarView.height)
+            self.toolBarView.frame = CGRect.init(x: 0, y: screenH - self.toolBarView.height - keyBoardFrame.size.height , width: screenW, height: self.toolBarView.height)
             
             self.emotionview.frame = emotionUpFrame
             
@@ -232,7 +222,7 @@ class ChatDetailViewController: UIViewController ,LiuqsToolBarDelegate ,UITextVi
         
         UIView.animate(withDuration: emotionTipTime, animations: {
             
-            self.toolBarView.frame = CGRect.init(x: 0, y: screenH - self.toolBarView.height - self.emotionview.height - 64, width: screenW, height: self.toolBarView.height)
+            self.toolBarView.frame = CGRect.init(x: 0, y: screenH - self.toolBarView.height - self.emotionview.height, width: screenW, height: self.toolBarView.height)
             
             self.resetChatList()
         })
@@ -305,8 +295,8 @@ class ChatDetailViewController: UIViewController ,LiuqsToolBarDelegate ,UITextVi
                 
                 self.emotionview.frame = emotionUpFrame
                 
-                self.toolBarView.frame = CGRect.init(x: 0, y: screenH - self.toolBarView.height - self.emotionview.height - 64, width: screenW, height: self.toolBarView.height)
-                
+                self.toolBarView.frame = CGRect.init(x: 0, y: screenH - self.toolBarView.height - self.emotionview.height, width: screenW, height: self.toolBarView.height)
+                print(self.toolBarView.frame.origin.y)
                 self.resetChatList()
             })
         }
@@ -319,13 +309,13 @@ class ChatDetailViewController: UIViewController ,LiuqsToolBarDelegate ,UITextVi
         //判断是否滚动到底部，会有一个误差值
         if tableView.contentOffset.y > offSetY - 5 || tableView.contentOffset.y > offSetY + 5 {
             
-            self.tableView.frame = CGRect.init(x: 0, y: self.tableView.y, width: screenW, height: self.toolBarView.y)
+            self.tableView.frame = CGRect.init(x: 0, y: self.tableView.y, width: screenW, height: self.toolBarView.y - 64)
             
             ScrollTableViewToBottom()
             
         }else {
             
-            self.tableView.frame = CGRect.init(x: 0, y: self.tableView.y, width: screenW, height: self.toolBarView.y)
+            self.tableView.frame = CGRect.init(x: 0, y: self.tableView.y, width: screenW, height: self.toolBarView.y - 64)
         }
     }
     
@@ -357,11 +347,11 @@ class ChatDetailViewController: UIViewController ,LiuqsToolBarDelegate ,UITextVi
         
         if (self.keyBoardH < self.emotionview.height) {
             
-            self.toolBarView.y = screenH - self.toolBarView.height - self.emotionview.height - 64;
+            self.toolBarView.y = screenH - self.toolBarView.height - self.emotionview.height;
             
         }else {
             
-            self.toolBarView.y = screenH - self.toolBarView.height - self.keyBoardH - 64;
+            self.toolBarView.y = screenH - self.toolBarView.height - self.keyBoardH;
         }
         if (textView.text.characters.count > 0) {
             
@@ -372,7 +362,7 @@ class ChatDetailViewController: UIViewController ,LiuqsToolBarDelegate ,UITextVi
             self.emotionview.sendBtn.isSelected = false;
         }
     
-        self.tableView.height = self.toolBarView.y
+        self.tableView.height = self.toolBarView.y - 64
     }
     
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {

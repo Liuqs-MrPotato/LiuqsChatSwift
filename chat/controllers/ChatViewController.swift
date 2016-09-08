@@ -32,7 +32,7 @@ class ChatViewController: UIViewController, UITableViewDataSource, UITableViewDe
    
     func createTableView(){
         
-        chatList = UITableView.init(frame: CGRect(x:0,y:0,width:screenW,height:screenH - 108), style: UITableViewStyle.plain)
+        chatList = UITableView.init(frame: CGRect(x:0,y:64,width:screenW,height:screenH - 108), style: UITableViewStyle.plain)
     
         chatList?.dataSource      = self;
         
@@ -67,7 +67,11 @@ class ChatViewController: UIViewController, UITableViewDataSource, UITableViewDe
         
         tableView.deselectRow(at: indexPath, animated: true)
         
-        self.navigationController?.pushViewController(ChatDetailViewController(), animated: true)
+        let chatVC = ChatDetailViewController()
+        
+        chatVC.hidesBottomBarWhenPushed = true
+        
+        self.navigationController?.pushViewController(chatVC, animated: true)
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
