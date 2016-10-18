@@ -126,7 +126,7 @@ class tabBarController: UITabBarController,UITabBarControllerDelegate, UIViewCon
         
         let pushTran:LiuqsPushTransition = LiuqsPushTransition()
         
-        pushTran.btnRect = self.composeRect
+        pushTran.btnRect = CGRect.init(x: (screenW - 44) * 0.5, y: screenH - 44, width: 44, height: 44)
         
         return pushTran
     }

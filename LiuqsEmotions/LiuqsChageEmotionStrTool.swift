@@ -59,7 +59,7 @@ class LiuqsChageEmotionStrTool: NSObject {
         
         let paragraphStyle:NSMutableParagraphStyle = NSMutableParagraphStyle();
     
-        let attstrDic = [NSForegroundColorAttributeName:_textColor,NSFontAttributeName:_font,NSParagraphStyleAttributeName:paragraphStyle]
+        let attstrDic = [NSForegroundColorAttributeName:_textColor,NSFontAttributeName:_font,NSParagraphStyleAttributeName:paragraphStyle] as [String : Any]
 
         let maxsize:CGSize = CGSize.init(width: screenW, height: screenH)
         
@@ -81,7 +81,7 @@ class LiuqsChageEmotionStrTool: NSObject {
         
         let totalRange:NSRange = NSRange.init(location: 0, length: _string.characters.count)
         
-        _matches = regex.matches(in: _string, options:[], range:totalRange).reversed()
+        _matches = regex.matches(in: _string, options: [], range: totalRange) as NSArray
         
     }
     
@@ -105,46 +105,44 @@ class LiuqsChageEmotionStrTool: NSObject {
             
             let tagString:String = String(str.substring(with: matchRange))
             
-            let imageName:String = _emojiImages.object(forKey: tagString) as! String
+            let imageName:String? = _emojiImages.object(forKey: tagString) as? String
             
-            if (imageName == "" || imageName.characters.count == 0) {continue};
+            if (imageName == nil) {continue};
             
-            //这里有一个bug不知道怎么处理
-            var imageData:NSData = NSData()
+            let image:UIImage = UIImage.init(named: imageName!)!
             
-            let path:String = Bundle.main.path(forResource: imageName, ofType: "png")!
-            
-            do {try imageData = NSData.init(contentsOfFile: path)} catch{return}
-            
-            attachMent.image = UIImage.init(data: imageData as Data)
+            attachMent.image = image
             
             let imageStr:NSAttributedString = NSAttributedString.init(attachment: attachMent)
             
-            record.setObject(NSValue.init(range: matchRange), forKey: "range")
+            record.setObject(NSValue.init(range: matchRange), forKey: "range" as NSCopying)
             
-            record.setObject(imageStr, forKey: "image")
+            record.setObject(imageStr, forKey: "image" as NSCopying)
             
             imageDataArray.add(record)
+            
         }
         _imageDataArray = imageDataArray
-        
+
     }
     
+    //这里必须倒着替换，不然会崩溃
     static func setResultStrUseReplace() {
 
         let result:NSMutableAttributedString = _attStr
         
         for i:Int in 0..<_imageDataArray.count {
             
-            let imageDic:NSDictionary = _imageDataArray.object(at: i) as! NSDictionary
+            let imageDic:NSDictionary = _imageDataArray.object(at: _imageDataArray.count - i - 1) as! NSDictionary
             
-            let range:NSRange = (imageDic.object(forKey: "range")?.rangeValue)!
+            let range:NSRange = imageDic.object(forKey: "range") as! NSRange
             
-            let imageStr:NSMutableAttributedString = imageDic.object(forKey: "image") as!NSMutableAttributedString
+            let imageStr:NSMutableAttributedString = imageDic.object(forKey: "image") as! NSMutableAttributedString
+            
+            print(range.location,range.length,result.length)
             
             result.replaceCharacters(in: range, with: imageStr)
         }
-        
         _resultStr = result;
     }
     

@@ -24,9 +24,9 @@ class LiuqsPushTransition: NSObject,UIViewControllerAnimatedTransitioning,CAAnim
 
     TransitionContext = transitionContext
     
-    let fromVC:UIViewController = transitionContext.viewController(forKey: UITransitionContextFromViewControllerKey)!
+    let fromVC:UIViewController = transitionContext.viewController(forKey: UITransitionContextViewControllerKey.from)!
     
-    let toVC:UIViewController = transitionContext.viewController(forKey: UITransitionContextToViewControllerKey)!
+    let toVC:UIViewController = transitionContext.viewController(forKey: UITransitionContextViewControllerKey.to)!
     
     let containerView:UIView = transitionContext.containerView
     
@@ -40,7 +40,7 @@ class LiuqsPushTransition: NSObject,UIViewControllerAnimatedTransitioning,CAAnim
     
     let finalPoint:CGPoint;
     
-    //判断触发点在那个象限
+    //判断触发点在哪个象限
     if(btnRect.origin.x > (toVC.view.bounds.size.width / 2)){
         if (btnRect.origin.y < (toVC.view.bounds.size.height / 2)) {
             //第一象限
@@ -59,9 +59,10 @@ class LiuqsPushTransition: NSObject,UIViewControllerAnimatedTransitioning,CAAnim
             finalPoint = CGPoint.init(x: button.center.x - toVC.view.bounds.maxX, y: button.center.y - 0)
         }
     }
+    
     let radius:CGFloat = sqrt(finalPoint.x * finalPoint.x + finalPoint.y * finalPoint.y)
 
-    let startPath:UIBezierPath = UIBezierPath.init(ovalIn:btnRect.insetBy(dx: -radius, dy: -radius) )
+    let startPath:UIBezierPath = UIBezierPath.init(ovalIn:btnRect.insetBy(dx: -radius, dy: -radius))
     
     let maskLayer:CAShapeLayer = CAShapeLayer()
     
@@ -88,8 +89,8 @@ class LiuqsPushTransition: NSObject,UIViewControllerAnimatedTransitioning,CAAnim
     func animationDidStop(_ anim: CAAnimation, finished flag: Bool) {
         
         TransitionContext?.completeTransition(!(TransitionContext?.transitionWasCancelled)!)
-        TransitionContext?.viewController(forKey: UITransitionContextFromViewControllerKey)?.view.layer.mask = nil
-        TransitionContext?.viewController(forKey: UITransitionContextToViewControllerKey)?.view.layer.mask = nil;
+        TransitionContext?.viewController(forKey: UITransitionContextViewControllerKey.from)?.view.layer.mask = nil
+        TransitionContext?.viewController(forKey: UITransitionContextViewControllerKey.to)?.view.layer.mask = nil;
     }
 
 }

@@ -1,3 +1,4 @@
+
 //
 //  LiuqsPopTransition.swift
 //  LiuqsChatEmotionSwift
@@ -24,9 +25,9 @@ class LiuqsPopTransition: NSObject,UIViewControllerAnimatedTransitioning,CAAnima
         
         TransitionContext = transitionContext
         
-        let fromVC:UIViewController = transitionContext.viewController(forKey: UITransitionContextFromViewControllerKey)!
+        let fromVC:UIViewController = transitionContext.viewController(forKey: UITransitionContextViewControllerKey.from)!
         
-        let toVC:UIViewController = transitionContext.viewController(forKey: UITransitionContextToViewControllerKey)!
+        let toVC:UIViewController = transitionContext.viewController(forKey: UITransitionContextViewControllerKey.to)!
         
         let containerView:UIView = transitionContext.containerView
         
@@ -88,8 +89,8 @@ class LiuqsPopTransition: NSObject,UIViewControllerAnimatedTransitioning,CAAnima
     func animationDidStop(_ anim: CAAnimation, finished flag: Bool) {
         
         TransitionContext?.completeTransition(!(TransitionContext?.transitionWasCancelled)!)
-        TransitionContext?.viewController(forKey: UITransitionContextFromViewControllerKey)?.view.layer.mask = nil
-        TransitionContext?.viewController(forKey: UITransitionContextToViewControllerKey)?.view.layer.mask = nil;
+        TransitionContext?.viewController(forKey: UITransitionContextViewControllerKey.from)?.view.layer.mask = nil
+        TransitionContext?.viewController(forKey: UITransitionContextViewControllerKey.to)?.view.layer.mask = nil;
     }
     
 }

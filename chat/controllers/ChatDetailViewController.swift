@@ -162,30 +162,28 @@ class ChatDetailViewController: UIViewController ,LiuqsToolBarDelegate ,UITextVi
 
     //注册监听
     func addObsevers() {
-
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillChangeFrame(noti:)), name: NSNotification.Name.UIKeyboardWillChangeFrame, object: nil)
         
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(noti:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(noti:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
     }
     
-    //键盘高度改变的通知事件
-    func keyboardWillChangeFrame(noti:NSNotification) {
+    //键盘出现
+    func keyboardWillShow(noti:NSNotification) {
         
-        let userInfo:NSDictionary = noti.userInfo!
+        let userInfo:NSDictionary = noti.userInfo! as NSDictionary
         
-        let keyBoardFrame:CGRect = (userInfo.object(forKey: UIKeyboardFrameEndUserInfoKey)?.cgRectValue)!
+        let begin:CGRect = (((userInfo.object(forKey: UIKeyboardFrameBeginUserInfoKey)) as? NSValue)?.cgRectValue)!
         
-        let ketBoardY:CGFloat = keyBoardFrame.origin.y
+        let keyBoardFrame:CGRect = (((userInfo.object(forKey: UIKeyboardFrameEndUserInfoKey)) as? NSValue)?.cgRectValue)!
         
-        if ketBoardY == screenH {
-            
-            HandleKeyBoardHide()
-        }else {
-            
+        //处理三方键盘走多次
+        if begin.size.height > 0 && begin.origin.y - keyBoardFrame.origin.y > 0 {
+    
             HandleKeyBoardShow(keyBoardFrame: keyBoardFrame)
+            
+            self.keyBoardH = keyBoardFrame.size.height;
         }
-        
-        self.keyBoardH = keyBoardFrame.size.height;
     }
     
     //键盘隐藏的通知事件
@@ -207,11 +205,12 @@ class ChatDetailViewController: UIViewController ,LiuqsToolBarDelegate ,UITextVi
             
             self.toolBarView.frame = CGRect.init(x: 0, y: screenH - self.toolBarView.height - keyBoardFrame.size.height , width: screenW, height: self.toolBarView.height)
             
-            self.emotionview.frame = emotionUpFrame
-            
             self.resetChatList()
-        })
-    
+            
+            }) { (Bool) in
+                
+           self.emotionview.frame = emotionUpFrame
+        }
     }
     
     //处理键盘收起
@@ -416,9 +415,9 @@ class ChatDetailViewController: UIViewController ,LiuqsToolBarDelegate ,UITextVi
     //创建一条数据
     func createDataSource(text:String) {
     
-        let cellFrame:LiuqsChatCellFrame = LiuqsChatCellFrame()
+        let cellFrame = LiuqsChatCellFrame()
         
-        let message:LiuqsChatMessage = LiuqsChatMessage()
+        let message   = LiuqsChatMessage()
         
         message.message = text
         
@@ -427,7 +426,7 @@ class ChatDetailViewController: UIViewController ,LiuqsToolBarDelegate ,UITextVi
         message.currentUserType = userType.other
         
         cellFrame.message = message
-        
+
         dataSource.add(cellFrame)
         
     }

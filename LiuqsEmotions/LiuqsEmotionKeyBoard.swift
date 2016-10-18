@@ -473,7 +473,7 @@ class LiuqsEmotionKeyBoard: UIImageView ,UIScrollViewDelegate {
             
             let imageKey:String = String(btn.tag)
             
-            let title:String = String(_emotionGifTitle[imageKey]!)
+            let title:String = String(describing: _emotionGifTitle[imageKey]!)
             
             titleLabel.text = title
             
