@@ -11,9 +11,11 @@ import UIKit
 class ChatListViewCell: UITableViewCell {
     
     
-    private lazy var iconImage:UIImageView = UIImageView()
+    private lazy var iconImage   = UIImageView()
     
-    private lazy var nameLabel:UILabel = UILabel()
+    private lazy var nameLabel   = UILabel()
+    
+    private lazy var detailLabel = UILabel()
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -32,6 +34,8 @@ class ChatListViewCell: UITableViewCell {
         
         addSubview(nameLabel)
         
+        addSubview(detailLabel)
+        
         layout()
         
         initSomething()
@@ -40,22 +44,19 @@ class ChatListViewCell: UITableViewCell {
     private func initSomething() {
     
         iconImage.backgroundColor = UIColor.orange
-        
         iconImage.layer.cornerRadius = 5.0;
-        
         iconImage.layer.masksToBounds = true;
-        
         iconImage.image = UIImage.init(named: "1")
         
         
         nameLabel.font      = UIFont.systemFont(ofSize: 17)
-        
         nameLabel.text      = "和路飞的聊天"
-        
         nameLabel.textColor = UIColor.gray
         
-
         
+        detailLabel.font      = UIFont.systemFont(ofSize: 14)
+        detailLabel.textColor = UIColor .lightGray
+        detailLabel.text      = "左划可以删除哦"
         
     }
     
@@ -69,10 +70,13 @@ class ChatListViewCell: UITableViewCell {
         
         
         nameLabel.translatesAutoresizingMaskIntoConstraints = false;
-        addConstraint(NSLayoutConstraint(item: nameLabel, attribute: NSLayoutAttribute.top, relatedBy: NSLayoutRelation.equal, toItem: self, attribute: NSLayoutAttribute.top, multiplier: 1.0, constant: 25))
+        addConstraint(NSLayoutConstraint(item: nameLabel, attribute: NSLayoutAttribute.top, relatedBy: NSLayoutRelation.equal, toItem: self, attribute: NSLayoutAttribute.top, multiplier: 1.0, constant: 5))
         addConstraint(NSLayoutConstraint(item: nameLabel, attribute: NSLayoutAttribute.left, relatedBy: NSLayoutRelation.equal, toItem: iconImage, attribute: NSLayoutAttribute.right, multiplier: 1.0, constant: 10))
         addConstraint(NSLayoutConstraint(item: nameLabel, attribute: NSLayoutAttribute.width, relatedBy: NSLayoutRelation.equal, toItem: nil, attribute: NSLayoutAttribute.width, multiplier: 1.0, constant: 200))
         addConstraint(NSLayoutConstraint(item: nameLabel, attribute: NSLayoutAttribute.height, relatedBy: NSLayoutRelation.equal, toItem: nil, attribute: NSLayoutAttribute.height, multiplier: 1.0, constant: 30))
+        
+        
+        detailLabel.frame = CGRect.init(x: 75, y: 50, width: screenW - 60, height: 20)
         
     }
 }

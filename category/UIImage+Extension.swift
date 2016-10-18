@@ -29,7 +29,6 @@ extension UIImage {
         return image
     }
     
-    
     static func resizebleImage(imageName:String) -> UIImage {
     
         var imageNor = UIImage.init(named: imageName)

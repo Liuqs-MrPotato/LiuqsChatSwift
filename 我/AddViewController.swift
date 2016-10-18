@@ -17,7 +17,7 @@ class AddViewController: UIViewController,UINavigationControllerDelegate {
 
         initSomething()
         createCancelBtn()
-//        creatEffectView()
+        createNotiLabel()
         
     }
     
@@ -35,6 +35,22 @@ class AddViewController: UIViewController,UINavigationControllerDelegate {
         return UIStatusBarStyle.lightContent
     }
     
+    func createNotiLabel() {
+    
+        let label = UILabel.init(frame: CGRect.init(x: 0, y: 20, width: screenW, height: screenH - 64))
+        
+        label.text = "这是一个控制器\nhttps://github.com/LMMIsGood/LiuqsChatSwift"
+        
+        label.font = UIFont.systemFont(ofSize: 40)
+        
+        label.numberOfLines = 0
+        
+        label.textColor = UIColor.white
+        
+        label.textAlignment = NSTextAlignment.center
+
+        self.view.addSubview(label)
+    }
 
     func initSomething() {
         

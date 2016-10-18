@@ -13,6 +13,8 @@ class ChatViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     var chatList:UITableView?
     
+    var rows = 10
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -53,7 +55,7 @@ class ChatViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        return 10
+        return rows
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -87,8 +89,10 @@ class ChatViewController: UIViewController, UITableViewDataSource, UITableViewDe
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         
         let deleteAction:UITableViewRowAction = UITableViewRowAction.init(style: UITableViewRowActionStyle.default, title: "删除") { (deleteAction, IndexPath) in
+         
+            self.rows -= 1
             
-            
+            tableView.deleteRows(at: [indexPath], with: UITableViewRowAnimation.automatic)
         }
         
         return [deleteAction]
