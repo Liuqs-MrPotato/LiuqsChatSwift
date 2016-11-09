@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol LiuqsEmotionKeyBoardDelegate {
+public protocol LiuqsEmotionKeyBoardDelegate {
     
     func emotionView_sBtnDidClick(btn:UIButton)
     
@@ -436,7 +436,6 @@ class LiuqsEmotionKeyBoard: UIImageView ,UIScrollViewDelegate {
             }
             
             self.emotonViewPageFour.addSubview(btn)
-            
         }
     }
 
@@ -451,7 +450,6 @@ class LiuqsEmotionKeyBoard: UIImageView ,UIScrollViewDelegate {
         var row:CGFloat
         
         var page:CGFloat
-
         
         for i:Int in 0..<gifCount {
             
@@ -505,7 +503,6 @@ class LiuqsEmotionKeyBoard: UIImageView ,UIScrollViewDelegate {
                 self.emotonViewPageEight.addSubview(btn)
             }
         }
-
     }
     
     func createPageControl() {
@@ -715,7 +712,7 @@ class LiuqsEmotionKeyBoard: UIImageView ,UIScrollViewDelegate {
     //gif表情按钮点击事件
     func emotionGifClick(btn:UIButton) {
     
-        
+        self.delegate?.gifBtnClick(btn: btn)
     }
     
     //发送，删除，表情等按钮的事件，用来处理按钮状态

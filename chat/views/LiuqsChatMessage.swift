@@ -28,4 +28,6 @@ class LiuqsChatMessage: NSObject {
     
     var currentUserType = userType.me
     
+    var messageType:Int = 0
+    
 }

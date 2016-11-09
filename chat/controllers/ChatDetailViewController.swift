@@ -62,7 +62,7 @@ class ChatDetailViewController: UIViewController ,LiuqsToolBarDelegate ,UITextVi
     
     func createExampleData() {
         
-        for i: Int in 0...1 {
+        for i: Int in 0...3 {
         
             let chatCellFrame:LiuqsChatCellFrame = LiuqsChatCellFrame()
             
@@ -70,15 +70,30 @@ class ChatDetailViewController: UIViewController ,LiuqsToolBarDelegate ,UITextVi
             
             var messageText = String()
             
-            if i % 2 == 0 {
+            if i == 0 {
                 
                 message.currentUserType = userType.other
                 message.userName = "鸣人"
-                messageText = "在村里，Lz辈分比较大，在我还是小屁孩的时候就有大人喊我叔了，这不算糗。 成年之后，鼓起勇气向村花二丫深情表白了(当然是没有血缘关系的)，结果她一脸淡定的回绝了:“二叔！别闹……”"
-            }else {
-            
+                message.messageType = 0
+                messageText = "在村里，Lz辈分比较大，在我还是小屁孩的时候就有大人喊我叔了，这不算糗[委屈]。 成年之后，鼓起勇气向村花二丫深情表白了(当然是没有血缘关系的)[害羞]，结果她一脸淡定的回绝了:“二叔！别闹……”[尴尬]"
+            }else if i == 2 {
+                
+                message.currentUserType = userType.me
                 message.userName = "路飞"
+                message.messageType = 0;
                 messageText = "小学六年级书法课后不知是哪个用红纸写了张六畜兴旺贴教室门上，上课语文老师看看门走了，过了一会才来，过了几天去办公室交作业听见语文老师说：看见那几个字我本来是不想进去的，但是后来一想养猪的也得进去喂猪"
+            }else if i == 1 {
+            
+                message.currentUserType = userType.other
+                message.userName = "鸣人"
+                message.messageType = 1
+                message.gifName = "2_4"
+            }else if i == 3 {
+            
+                message.currentUserType = userType.me
+                message.userName = "路飞"
+                message.messageType = 1
+                message.gifName = "2_8"
             }
             
             message.message = messageText
@@ -385,12 +400,38 @@ class ChatDetailViewController: UIViewController ,LiuqsToolBarDelegate ,UITextVi
             
            sendMessage()
         }
-        
     }
     
     func gifBtnClick(btn:UIButton) {
     
+        print("动态按钮\(btn.tag)");
         
+        let gifName = "2_\(btn.tag)"
+        
+        sendGifmessage(gifname: gifName)
+    }
+    
+    func sendGifmessage(gifname:String){
+        
+        let cellFrame = LiuqsChatCellFrame()
+        
+        let message   = LiuqsChatMessage()
+        
+        message.messageType = 1
+        
+        message.message = ""
+        
+        message.userName = "鸣人"
+        
+        message.gifName = gifname
+        
+        message.currentUserType = userType.other
+        
+        cellFrame.message = message
+        
+        dataSource.add(cellFrame)
+        
+        refreshChatList()
     }
     
     //发送消息
@@ -420,6 +461,8 @@ class ChatDetailViewController: UIViewController ,LiuqsToolBarDelegate ,UITextVi
         let message   = LiuqsChatMessage()
         
         message.message = text
+        
+        message.messageType = 0
         
         message.userName = "鸣人"
         

@@ -10,25 +10,25 @@ import UIKit
 
 class LiuqsChageEmotionStrTool: NSObject {
     
-    static private let checkStr = "\\[[a-zA-Z0-9\\u4e00-\\u9fa5]+\\]"
+    static private let checkStr        = "\\[[a-zA-Z0-9\\u4e00-\\u9fa5]+\\]"
     
-    static private var _emotionSize:CGSize = CGSize()
+    static private var _emotionSize    = CGSize()
     
-    static private var _font:UIFont        = UIFont()
+    static private var _font           = UIFont()
     
-    static private var _textColor:UIColor  = UIColor()
+    static private var _textColor      = UIColor()
     
-    static private var _matches:NSArray    = NSArray()
+    static private var _matches        = NSArray()
     
-    static private var _string:String      = String()
+    static private var _string         = String()
     
-    static private var _emojiImages:NSDictionary            = NSDictionary()
+    static private var _emojiImages    = NSDictionary()
     
-    static private var _imageDataArray:NSMutableArray       = NSMutableArray()
+    static private var _imageDataArray = NSMutableArray()
     
-    static private var _attStr:NSMutableAttributedString    = NSMutableAttributedString()
+    static private var _attStr         = NSMutableAttributedString()
     
-    static private var _resultStr:NSMutableAttributedString = NSMutableAttributedString()
+    static private var _resultStr      = NSMutableAttributedString()
     
 
     static func changeStr(string:String, font:UIFont, textColor:UIColor) -> NSMutableAttributedString {
@@ -38,15 +38,15 @@ class LiuqsChageEmotionStrTool: NSObject {
         _string    = string
         
         _textColor = textColor
-        
+        //初始化
         initProperty()
-        
+        //获取匹对结果
         executeMatch()
-        
+        //遍历查询结果并保存
         setImageDataArray()
-
+        //执行替换过程
         setResultStrUseReplace()
-        
+        //返回结果
         return _resultStr;
     }
     
@@ -56,7 +56,7 @@ class LiuqsChageEmotionStrTool: NSObject {
         let path:String = Bundle.main.path(forResource: "LiuqsEmoji", ofType: "plist")!
         
         _emojiImages = NSDictionary.init(contentsOfFile: path)!
-        
+        //设置字体属性
         let paragraphStyle:NSMutableParagraphStyle = NSMutableParagraphStyle();
     
         let attstrDic = [NSForegroundColorAttributeName:_textColor,NSFontAttributeName:_font,NSParagraphStyleAttributeName:paragraphStyle] as [String : Any]
@@ -64,11 +64,10 @@ class LiuqsChageEmotionStrTool: NSObject {
         let maxsize:CGSize = CGSize.init(width: screenW, height: screenH)
         
         let str:String = "/"
-        
+        //根据字体获取单个表情的大小
         let emojiRect:CGRect = str.boundingRect(with: maxsize, options: NSStringDrawingOptions.usesLineFragmentOrigin, attributes: attstrDic, context: nil)
         
         _emotionSize = emojiRect.size
-        
         
         _attStr = NSMutableAttributedString.init(string: _string, attributes:attstrDic)
     }
@@ -123,7 +122,6 @@ class LiuqsChageEmotionStrTool: NSObject {
             
         }
         _imageDataArray = imageDataArray
-
     }
     
     //这里必须倒着替换，不然会崩溃

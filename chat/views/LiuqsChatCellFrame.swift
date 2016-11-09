@@ -10,15 +10,15 @@ import UIKit
 
 class LiuqsChatCellFrame: NSObject {
     
-    var iconFrame:CGRect         = CGRect()
+    var iconFrame         = CGRect()
     
-    var nameFrame:CGRect         = CGRect()
+    var nameFrame         = CGRect()
     
-    var gifFrame:CGRect          = CGRect()
+    var textFrame         = CGRect()
     
-    var textFrame:CGRect         = CGRect()
+    var imageViewFrame    = CGRect()
     
-    var cellHeight:CGFloat       = CGFloat()
+    var cellHeight        = CGFloat()
     
     private let iconW:CGFloat    = 50.0
     
@@ -45,16 +45,27 @@ class LiuqsChatCellFrame: NSObject {
         //名字
         nameFrame = type ? CGRect.init(x: iconFrame.maxX + padding, y: iconFrameY, width: 100, height: 25) : CGRect.init(x: screenW - padding * 2 - iconFrameW - 100, y: iconFrameY, width: 100, height: 25)
         
-        //message
-        let str:String = (message?.message)!
-        let textAtt = LiuqsChageEmotionStrTool.changeStr(string: str, font: UIFont.systemFont(ofSize: 17.0), textColor: UIColor.black)
-        message?.attMessage = textAtt
-        let maxsize:CGSize = CGSize.init(width: Int(screenW - (iconFrameW + padding * 3) * 2), height: 1000)
-        let textSize:CGSize = textAtt.boundingRect(with: maxsize, options: .usesLineFragmentOrigin, context: nil).size
-        let emojiSize:CGSize = CGSize.init(width: textSize.width + padding * 2, height: textSize.height + padding * 2)
-        textFrame = type ? CGRect.init(x: padding * 2 + iconFrameW, y: iconFrameY + iconFrameH * 0.5, width: emojiSize.width, height: emojiSize.height) : CGRect.init(x: screenW - padding * 2 - iconFrameW - emojiSize.width, y: iconFrameY + iconFrameH * 0.5, width: emojiSize.width, height: emojiSize.height)
+        if message?.messageType == 0 {
+          
+            //message
+            let str:String = (message?.message)!
+            let textAtt = LiuqsChageEmotionStrTool.changeStr(string: str, font: UIFont.systemFont(ofSize: 17.0), textColor: UIColor.black)
+            message?.attMessage = textAtt
+            let maxsize:CGSize = CGSize.init(width: Int(screenW - (iconFrameW + padding * 3) * 2), height: 1000)
+            let textSize:CGSize = textAtt.boundingRect(with: maxsize, options: .usesLineFragmentOrigin, context: nil).size
+            let emojiSize:CGSize = CGSize.init(width: textSize.width + padding * 2, height: textSize.height + padding * 2)
+            textFrame = type ? CGRect.init(x: padding * 2 + iconFrameW, y: iconFrameY + iconFrameH * 0.5, width: emojiSize.width, height: emojiSize.height) : CGRect.init(x: screenW - padding * 2 - iconFrameW - emojiSize.width, y: iconFrameY + iconFrameH * 0.5, width: emojiSize.width, height: emojiSize.height)
+            cellHeight = textFrame.maxY + padding;
+        }else if message?.messageType == 1 {
         
-        cellHeight = textFrame.maxY + padding;
+            imageViewFrame = type ? CGRect.init(x: padding * 2 + iconFrameW, y: iconFrameY + iconFrameH * 0.5, width: 100, height: 100) : CGRect.init(x: screenW - padding * 2 - iconFrameW - 100, y: iconFrameY + iconFrameH * 0.5, width: 100, height: 100);
+            
+            cellHeight = imageViewFrame.maxY + padding;
+            
+        }else {
+    
+            
+        }
     }
     
 }

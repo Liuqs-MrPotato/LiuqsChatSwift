@@ -46,6 +46,4 @@ extension NSAttributedString {
         
        return plainString as String
     }
-
-    
 }
